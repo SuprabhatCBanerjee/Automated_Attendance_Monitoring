@@ -22,7 +22,6 @@ public class StudentController {
         dto.setEmail("hooman@noman.yl");
         dto.setDepartment("BokaLoca");
         dto.setPhone("123-654-879");
-        dto.setPassword("bhootkibegan");
         studentService.doStudentSignup(dto);
         return "hello world of attendance";
     }
