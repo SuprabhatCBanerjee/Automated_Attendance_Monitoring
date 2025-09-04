@@ -10,6 +10,7 @@ public class StudentSignupMapper {
         model.setName(dto.getName());
         model.setEmail(dto.getEmail());
         model.setPhone(dto.getPhone());
+        model.setUniqueRollNumber(dto.getUniqueRollNumber());
         model.setPassword(dto.getPassword());
         model.setDepartment(dto.getDepartment());
         return model;

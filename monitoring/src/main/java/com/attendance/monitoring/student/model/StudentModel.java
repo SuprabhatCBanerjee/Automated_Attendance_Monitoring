@@ -13,7 +13,7 @@ import lombok.Setter;
 public class StudentModel {
 
     @Id
-    private int id;
+    private String id;
     private String name;
     private String address;
     private String email;

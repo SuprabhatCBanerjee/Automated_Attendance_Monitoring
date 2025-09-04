@@ -10,6 +10,7 @@ public class StudentSignupDto {
     private String name;
     private String email;
     private String phone;
+    private String uniqueRollNumber;
     private String password; 
-    private String department;//or courses
+    private String department;//or 
 }
