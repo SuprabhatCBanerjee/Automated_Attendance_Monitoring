@@ -1,17 +1,22 @@
 package com.attendance.monitoring.subject.model;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 
 public class TimeTableModel {
     
     private String id;
-    private String roomNumber;
+    private String roomNumber;//same as scanner number
     private String numberOfClasses;
     private String section;
     private String department;
-    private ArrayList<String> subjectIds;
-    private ArrayList<String> facultyIds;
-
-    private ArrayList<String[]> classTime;
+    private String subjectId;
+    private String facultyId;
+    private String day;
+    private String classStart;
+    private String classEnd;
 
 }
