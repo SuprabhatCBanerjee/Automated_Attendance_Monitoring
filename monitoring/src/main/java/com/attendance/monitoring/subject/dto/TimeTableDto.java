@@ -1,4 +1,4 @@
-package com.attendance.monitoring.subject.model;
+package com.attendance.monitoring.subject.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,9 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class TimeTableModel {
-    
-    private String id;
+public class TimeTableDto {
     private String roomNumber;//same as scanner number
     private String numberOfClasses;
     private String section;
@@ -19,5 +17,4 @@ public class TimeTableModel {
     private String day;
     private String classStart;
     private String classEnd;
-
 }

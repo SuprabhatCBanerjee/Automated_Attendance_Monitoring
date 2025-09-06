@@ -1,5 +1,21 @@
 package com.attendance.monitoring.scanner.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.attendance.monitoring.scanner.dto.ScannerDto;
+import com.attendance.monitoring.student.dto.StudentRecordDto;
+
+
+
+@RestController
+@RequestMapping("/public")
 public class ScannerController {
     /**
      * on api call ==> abc.in/attendance/record <===> type POST
@@ -27,4 +43,43 @@ public class ScannerController {
      * step5 : all things works on offline server,
      *         in the night or as client requirements we push data to cloud server  
      */
+
+     @PostMapping("/student/record")
+     public String recordAttendance( ) {
+        
+         
+         return "i am record";
+     }
+
+     @GetMapping("/student/get-record")
+     public ResponseEntity<ScannerDto> getRecord() {
+
+        ScannerDto dto = new ScannerDto();
+
+        dto.setScannerNumber("ROOM_206");
+        dto.setTimeOfReceive("10:35");
+
+        ArrayList<StudentRecordDto> students = new ArrayList<>();
+
+        StudentRecordDto studentRecordDto1 = new StudentRecordDto();
+        studentRecordDto1.setStudentId("STU_12DA4");
+        studentRecordDto1.setValidationCount("8");
+        studentRecordDto1.setClassIn("10:02");
+        studentRecordDto1.setClassOut("10:42");
+
+        StudentRecordDto studentRecordDto2 = new StudentRecordDto();
+        studentRecordDto2.setStudentId("STU_12DA5");
+        studentRecordDto2.setValidationCount("6");
+        studentRecordDto2.setClassIn("10:05");
+        studentRecordDto2.setClassOut("10:40");
+
+        students.add(studentRecordDto1);
+        students.add(studentRecordDto2);
+        dto.setStudents(students);
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+     }
+     
+     
+     
 }
