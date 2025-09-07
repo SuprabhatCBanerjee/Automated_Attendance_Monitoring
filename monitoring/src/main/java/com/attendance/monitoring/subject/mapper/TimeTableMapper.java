@@ -10,31 +10,27 @@ public class TimeTableMapper {
     
     //toEntity
     public TimeTableModel toEntity(TimeTableDto dto){
+        
+        if (dto == null) return null;
         TimeTableModel model = new TimeTableModel();
-        // model.setRoomNumber(dto.getRoomNumber());
-        // model.setNumberOfClasses(dto.getNumberOfClasses());
-        model.setFacultyId(dto.getFacultyId());
         model.setSubjectId(dto.getSubjectId());
+        model.setFacultyId(dto.getFacultyId());
+        model.setPeriodNumber(dto.getPeriodNumber());
         model.setClassStart(dto.getClassStart());
         model.setClassEnd(dto.getClassEnd());
-        // model.setDay(dto.getDay());
-        // model.setSection(dto.getSection());
-        model.setPeriodNumber(dto.getPeriodNumber());
         return model;
     }
 
     //toDto
     public TimeTableDto toDto(TimeTableModel model){
+
+        if (model == null) return null;
         TimeTableDto dto = new TimeTableDto();
-        // dto.setRoomNumber(model.getRoomNumber());
-        // dto.setNumberOfClasses(model.getNumberOfClasses());
-        dto.setFacultyId(model.getFacultyId());
         dto.setSubjectId(model.getSubjectId());
+        dto.setFacultyId(model.getFacultyId());
+        dto.setPeriodNumber(model.getPeriodNumber());
         dto.setClassStart(model.getClassStart());
         dto.setClassEnd(model.getClassEnd());
-        // dto.setDay(model.getDay());
-        // dto.setSection(model.getSection());
-        dto.setPeriodNumber(model.getPeriodNumber());
         return dto;
     }
 }

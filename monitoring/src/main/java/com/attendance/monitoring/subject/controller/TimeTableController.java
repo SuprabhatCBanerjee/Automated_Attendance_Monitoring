@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,12 +15,8 @@ import com.attendance.monitoring.subject.dto.TimeTableBoxDto;
 import com.attendance.monitoring.subject.dto.TimeTableDto;
 import com.attendance.monitoring.subject.dto.TimeTableWrapperDto;
 import com.attendance.monitoring.subject.mapper.TimeTableWrapperMapper;
-import com.attendance.monitoring.subject.model.TimeTableBox;
 import com.attendance.monitoring.subject.model.TimeTableWrapper;
 import com.attendance.monitoring.subject.service.TimeTableService;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -76,18 +74,25 @@ public class TimeTableController {
     }
 
     //
-    // private TimeTableWrapperMapper wrapperMapper = new TimeTableWrapperMapper();
+    @Autowired
+    private TimeTableWrapperMapper wrapperMapper;
 
     @PostMapping("/table")
     public ResponseEntity<TimeTableWrapperDto> table(@RequestBody TimeTableWrapperDto wrapperDto) {
         
+        TimeTableWrapper wrapper = new TimeTableWrapper();
         TimeTableWrapperDto dto = new TimeTableWrapperDto();
 
       
 
         try {
-            TimeTableWrapper wp = tableService.saveTable(wrapperDto);
-            // dto = wrapperMapper.toDto(wp);
+            wrapper = wrapperMapper.toEntity(wrapperDto);
+            System.out.println(wrapper.getRoomNumber());
+            dto = wrapperMapper.toDto(wrapper);
+
+            this.tableService.saveTable(wrapperDto);
+            // System.out.println(dto.getWeeklyRoutine());
+            // System.out.println(dto.getRoomNumber());
             return new ResponseEntity<>(dto, HttpStatus.OK);
         } catch (Exception e) {
             // System.out.println(e.getLocalizedMessage());

@@ -15,14 +15,16 @@ public class TimeTableServiceImpl implements TimeTableService {
     @Autowired
     private TimeTableRepository tableRepository;
 
-    private TimeTableWrapperMapper wrapperMapper = new TimeTableWrapperMapper();
+    // private TimeTableWrapperMapper wrapperMapper = new TimeTableWrapperMapper();
+    @Autowired
+    private TimeTableWrapperMapper wrapperMapper;
 
     @Override
     public TimeTableWrapper saveTable(TimeTableWrapperDto wrapperDto) {
         try {
 
             TimeTableWrapper wrapper = wrapperMapper.toEntity(wrapperDto);
-            // this.tableRepository.save(wrapper);
+            this.tableRepository.save(wrapper);
             return wrapper;
         } catch (Exception e) {
             System.out.println(e.getMessage());

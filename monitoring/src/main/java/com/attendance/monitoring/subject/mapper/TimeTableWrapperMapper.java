@@ -1,44 +1,39 @@
 package com.attendance.monitoring.subject.mapper;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.attendance.monitoring.subject.dto.TimeTableBoxDto;
-import com.attendance.monitoring.subject.dto.TimeTableDto;
 import com.attendance.monitoring.subject.dto.TimeTableWrapperDto;
 import com.attendance.monitoring.subject.model.TimeTableBox;
-import com.attendance.monitoring.subject.model.TimeTableModel;
 import com.attendance.monitoring.subject.model.TimeTableWrapper;
 
 @Component
 public class TimeTableWrapperMapper {
 
-    private TimeTableMapper tableMapper = new TimeTableMapper();
-    private TimeTableboxMapper tableboxMapper = new TimeTableboxMapper();
+    @Autowired
+    private TimeTableboxMapper tableboxMapper;
 
     //toEntity
     public TimeTableWrapper toEntity(TimeTableWrapperDto dto){
+
+        if (dto == null) return null;
         TimeTableWrapper wrapper = new TimeTableWrapper();
         wrapper.setRoomNumber(dto.getRoomNumber());
         wrapper.setNumberOfClasses(dto.getNumberOfClasses());
         wrapper.setSection(dto.getSection());
         wrapper.setDepartment(dto.getDepartment());
 
-        for(TimeTableBoxDto boxDto : dto.getWeeklyRoutine()){
-            TimeTableBox box = new TimeTableBox();
-            box = tableboxMapper.toEntity(boxDto);
+        wrapper.setWeeklyRoutine(dto.getWeeklyRoutine() == null
+                ? new ArrayList<>() 
+                : dto.getWeeklyRoutine().stream().map(tableboxMapper::toEntity).collect(Collectors.toList()));   
 
-            for(TimeTableDto tableDto : boxDto.getTimeTable()){
-                TimeTableModel table = new TimeTableModel();
-                table = tableMapper.toEntity(tableDto);
-                box.addTimeTable(table);
-            }
-
-            wrapper.addTimeTableBox(box);
-        }
-
+       
         return wrapper;
+
     }
 
 
@@ -51,19 +46,16 @@ public class TimeTableWrapperMapper {
         dto.setYear(dto.getYear());
         dto.setNumberOfClasses(wrapper.getNumberOfClasses());
 
-        // ArrayList<TimeTableBoxDto> tableBoxDtos = new ArrayList<>();
-        // ArrayList<TimeTableDto> tableDtos = new ArrayList<>();
-
-        // for (TimeTableBox timeTableBox : wrapper.getWeeklyRoutine()) {
-        //     // TimeTableBoxDto boxDto = new TimeTableBoxDto();
-        //     // boxDto.setDay(timeTableBox.getDay());
-        //     TimeTableBoxDto boxDto = tableboxMapper.toDto(timeTableBox);
-        //     // for (TimeTableModel timeTableModel : ) {     
-        //     // }
-        //     tableBoxDtos.add(boxDto);
-        // }
-
-        // dto.setWeeklyRoutine(tableBoxDtos);
+          // map weekly routine
+        ArrayList<TimeTableBoxDto> tableBoxDtos = new ArrayList<>();
+        if (wrapper.getWeeklyRoutine() != null) {
+            for (TimeTableBox timeTableBox : wrapper.getWeeklyRoutine()) {
+                TimeTableBoxDto boxDto = tableboxMapper.toDto(timeTableBox);
+                tableBoxDtos.add(boxDto);
+            }
+        }
+        dto.setWeeklyRoutine(tableBoxDtos);
+     
         
         return dto;
     }

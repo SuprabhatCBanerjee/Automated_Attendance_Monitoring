@@ -1,39 +1,28 @@
 package com.attendance.monitoring.subject.mapper;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.attendance.monitoring.subject.dto.TimeTableBoxDto;
-import com.attendance.monitoring.subject.dto.TimeTableDto;
 import com.attendance.monitoring.subject.model.TimeTableBox;
-import com.attendance.monitoring.subject.model.TimeTableModel;
+
 
 @Component
 public class TimeTableboxMapper {
+
+    @Autowired
+    private TimeTableMapper tableMapper;
     //toEntity
     public TimeTableBox toEntity(TimeTableBoxDto dto){
-
+        if (dto == null) return null;
         TimeTableBox box = new TimeTableBox();
-        // box.setRoomNumber(dto.getRoomNumber());
-        // box.setDepartment(dto.getDepartment());
-        // box.setSection(dto.getSection());
         box.setDay(dto.getDay());
-        // box.setNumberOfClasses(dto.getNumberOfClasses());
-
-        for(TimeTableDto tableDto : dto.getTimeTable()){
-            TimeTableModel timeTableModel = new TimeTableModel();
-            // timeTableModel.setRoomNumber(tableDto.getRoomNumber());
-            timeTableModel.setSubjectId(tableDto.getSubjectId());
-            timeTableModel.setFacultyId(tableDto.getFacultyId());
-            timeTableModel.setClassStart(tableDto.getClassStart());
-            timeTableModel.setClassEnd(tableDto.getClassEnd()); 
-            // timeTableModel.setDay(tableDto.getDay());
-            // timeTableModel.setDepartment(tableDto.getDepartment());
-            // timeTableModel.setNumberOfClasses(tableDto.getNumberOfClasses());
-            timeTableModel.setPeriodNumber(tableDto.getPeriodNumber());
-            box.addTimeTable(timeTableModel);
-        }
+        box.setTimeTable(dto.getTimeTable() == null
+                ? new java.util.ArrayList<>()
+                : dto.getTimeTable().stream().map(tableMapper::toEntity).collect(Collectors.toList()));
         return box;
     }
 
@@ -41,30 +30,10 @@ public class TimeTableboxMapper {
     public TimeTableBoxDto toDto(TimeTableBox box){
 
         TimeTableBoxDto dto = new TimeTableBoxDto();
-
-        // dto.setRoomNumber(box.getRoomNumber());
         dto.setDay(box.getDay());
-        // dto.setDepartment(box.getDepartment());
-        // dto.setNumberOfClasses(box.getNumberOfClasses());
-
-        ArrayList<TimeTableDto> tableDtos = new ArrayList<>();
-
-        for(TimeTableModel model : box.getTimeTable()){
-            
-            TimeTableDto tableDto = new TimeTableDto();
-           
-            tableDto.setSubjectId(model.getSubjectId());
-            tableDto.setFacultyId(model.getFacultyId());
-            tableDto.setClassStart(model.getClassStart());
-            tableDto.setClassEnd(model.getClassEnd()); 
-            
-            tableDto.setPeriodNumber(model.getPeriodNumber());
-            //
-            tableDtos.add(tableDto);            
-        }
-
-        dto.setTimeTable(tableDtos);
-
+        dto.setTimeTable(box.getTimeTable() == null
+                ? Collections.emptyList()
+                : box.getTimeTable().stream().map(tableMapper::toDto).collect(Collectors.toList()));
         return dto;
     }
 }

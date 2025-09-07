@@ -1,22 +1,23 @@
 package com.attendance.monitoring.subject.model;
 
 import java.util.ArrayList;
-
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 
-@Document
+
 public class TimeTableBox {
     private String id;
     private String day;
-    private ArrayList<TimeTableModel> timeTable;
+    private List<TimeTableModel> timeTable = new ArrayList<>();
 
-    public void addTimeTable(TimeTableModel tableModel){
-        this.timeTable.add(tableModel);
-    }
+    // public void addTimeTable(TimeTableModel tableModel){
+    //     this.timeTable.add(tableModel);
+    // }
 }

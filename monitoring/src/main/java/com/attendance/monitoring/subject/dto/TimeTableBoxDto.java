@@ -1,6 +1,7 @@
 package com.attendance.monitoring.subject.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,5 +16,5 @@ public class TimeTableBoxDto {
     // private String section;
     // private String department;
     private String day;
-    private ArrayList<TimeTableDto> timeTable;
+    private List<TimeTableDto> timeTable = new ArrayList<>();
 }
