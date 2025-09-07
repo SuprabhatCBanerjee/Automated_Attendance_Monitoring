@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.attendance.monitoring.scanner.dto.ScannerDto;
 import com.attendance.monitoring.student.dto.StudentRecordDto;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -79,6 +81,20 @@ public class ScannerController {
 
         return new ResponseEntity<>(dto, HttpStatus.OK);
      }
+
+
+     @PostMapping("/student/record")
+     public ResponseEntity<?> postMethodName(@RequestBody ScannerDto dto) {
+         
+        try {
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         return new ResponseEntity<>(null,HttpStatus.OK);
+     }
+     
      
      
      

@@ -1,9 +1,6 @@
-package com.attendance.monitoring.record.model;
+package com.attendance.monitoring.record.dto;
 
 import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,11 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document("attendance")
-public class AttendanceBox {
-    
-    @Id
-    private String id;
+public class AttendanceBoxDto {
     
     private String subjectId;
     private String studentId;
@@ -31,5 +24,5 @@ public class AttendanceBox {
     private String universityId;
     private String department;
     private String section;
-    
+   
 }

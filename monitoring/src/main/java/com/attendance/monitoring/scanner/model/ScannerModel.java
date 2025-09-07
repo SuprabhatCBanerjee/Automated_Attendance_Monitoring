@@ -14,7 +14,8 @@ public class ScannerModel {
     private String id;
     private String scannerNumber;//same as room number
     private String timeOfReceive;
-    private ArrayList<StudentRecordModel> students;
+    private String universityId;
+    private ArrayList<StudentRecordModel> students; 
 
     public void addStudents(StudentRecordModel recordModel){
         this.students.add(recordModel);

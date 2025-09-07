@@ -10,8 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class ScannerDto {
+public class ScannerDto { 
     private String scannerNumber;//same as room number
     private String timeOfReceive;
+    private String universityId;
     private ArrayList<StudentRecordDto> students;
 }
