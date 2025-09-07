@@ -9,5 +9,11 @@ import lombok.Setter;
 @Setter
 
 public class TimeTableBoxDto {
+    
+    // private String roomNumber;//same as scanner number
+    // private String numberOfClasses;
+    // private String section;
+    // private String department;
+    private String day;
     private ArrayList<TimeTableDto> timeTable;
 }
