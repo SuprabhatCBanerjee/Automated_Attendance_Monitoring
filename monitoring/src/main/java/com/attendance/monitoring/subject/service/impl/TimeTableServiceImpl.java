@@ -29,7 +29,18 @@ public class TimeTableServiceImpl implements TimeTableService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        }   
+    }
+
+    @Override
+    public TimeTableWrapperDto getTimeTable(String universityId, String roomNumber, String department, String year) {
+        try {
+            TimeTableWrapper wrapper = this.tableRepository.findByUniversityIdAndRoomNumberAndDepartmentAndYear(universityId, roomNumber, department, year);
+            TimeTableWrapperDto wrapperDto = this.wrapperMapper.toDto(wrapper);
+            return wrapperDto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        
     }
 }

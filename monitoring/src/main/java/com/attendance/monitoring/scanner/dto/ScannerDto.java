@@ -14,5 +14,6 @@ public class ScannerDto {
     private String scannerNumber;//same as room number
     private String timeOfReceive;
     private String universityId;
+    private String department;
     private ArrayList<StudentRecordDto> students;
 }

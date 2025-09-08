@@ -16,6 +16,7 @@ public class TimeTableWrapperDto {
     private String section;
     private String department;
     private String year;
+    private String universityId;
 
     private List<TimeTableBoxDto> weeklyRoutine = new ArrayList<>();
     

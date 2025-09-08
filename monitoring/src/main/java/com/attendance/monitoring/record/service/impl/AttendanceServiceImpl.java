@@ -1,5 +1,8 @@
 package com.attendance.monitoring.record.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +22,12 @@ public class AttendanceServiceImpl implements AttendanceService{
     private AttendanceBoxRepository attendanceBoxRepository;
 
     @Override
-    public boolean saveAttendance(AttendanceBoxDto dto) {
+    public boolean saveAttendance(List<AttendanceBoxDto> dtos) {
 
         try {
-            AttendanceBox attendanceBox = new AttendanceBox();
-            attendanceBox = attendanceBoxMapper.toEntity(dto);
-            this.attendanceBoxRepository.save(attendanceBox);
+            List<AttendanceBox> attendanceBoxs = dtos.stream().map(attendanceBoxMapper::toEntity).collect(Collectors.toList());
+            
+            this.attendanceBoxRepository.saveAll(attendanceBoxs);
             
             return true;
         } catch (Exception e) {
