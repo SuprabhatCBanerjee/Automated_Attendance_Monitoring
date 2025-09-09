@@ -20,7 +20,7 @@ public class AttendanceBox {
     private String subjectId;
     private String studentId;
     private String teacherId;
-    private String isPresent;
+    private Boolean isPresent;
     private String periodNumber;
     private String timeOfAttendance;
     private LocalDateTime date;

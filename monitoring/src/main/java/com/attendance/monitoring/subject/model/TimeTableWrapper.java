@@ -23,6 +23,7 @@ public class TimeTableWrapper {
     private String department;
     private String year;
     private String universityId;
+    private String semester;
 
     private List<TimeTableBox> weeklyRoutine = new ArrayList<>();
 
