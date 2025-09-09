@@ -9,7 +9,7 @@ import com.attendance.monitoring.subject.model.TimeTableWrapper;
 
 public interface TimeTableService {
     public TimeTableWrapper saveTable(TimeTableWrapperDto wrapperDto);
-    public TimeTableWrapperDto getTimeTable(String universityId, String roomNumber, String department, String year);
+    public TimeTableWrapperDto getTimeTable(String universityId, String roomNumber, String department);
     public List<TimeTableDto> getDailyRoutine(List<TimeTableBoxDto> tableBoxDto, String day);
     public TimeTableDto getOnePeriod(List<TimeTableDto> timeTableDtos, String time);
 }

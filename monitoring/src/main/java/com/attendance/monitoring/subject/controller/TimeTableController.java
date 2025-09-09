@@ -37,6 +37,7 @@ public class TimeTableController {
         tableWrapper.setNumberOfClasses("7");
         tableWrapper.setRoomNumber("ROOM_B125A");
         tableWrapper.setYear("FIRST-YEAR");
+        tableWrapper.setUniversityId("UNI-12B");
 
         //box 
         ArrayList<TimeTableBoxDto> boxDtos = new ArrayList<>();
@@ -51,21 +52,21 @@ public class TimeTableController {
         ArrayList<TimeTableDto> tableDtos1 = new ArrayList<>();
 
         TimeTableDto tableDto1 = new TimeTableDto();
-        tableDto1.setSubjectId("ENGLISH");
+        tableDto1.setSubjectId("MATH");
+        tableDto1.setClassStart("10:00");
+        tableDto1.setClassEnd("10:45");
 
         tableDtos1.add(tableDto1);
         boxDto1.setTimeTable(tableDtos1);
         //bulid day 1 routine
 
-        //table
-        ArrayList<TimeTableDto> tableDtos2 = new ArrayList<>();
-
         TimeTableDto tableDto2 = new TimeTableDto();
-        tableDto2.setSubjectId("ENGLISH");
+        tableDto2.setSubjectId("SCIENCE");
+        tableDto2.setClassStart("2:00");
+        tableDto2.setClassEnd("2:45");
 
-        tableDtos2.add(tableDto1);
-        boxDto2.setTimeTable(tableDtos2);
-        //bulid day 2 routine
+        tableDtos1.add(tableDto2);
+        boxDto2.setTimeTable(tableDtos1);
 
         boxDtos.add(boxDto1);
         boxDtos.add(boxDto2);

@@ -40,9 +40,9 @@ public class TimeTableServiceImpl implements TimeTableService {
     }
 
     @Override
-    public TimeTableWrapperDto getTimeTable(String universityId, String roomNumber, String department, String year) {
+    public TimeTableWrapperDto getTimeTable(String universityId, String roomNumber, String department) {
         try {
-            TimeTableWrapper wrapper = this.tableRepository.findByUniversityIdAndRoomNumberAndDepartmentAndYear(universityId, roomNumber, department, year);
+            TimeTableWrapper wrapper = this.tableRepository.findByUniversityIdAndRoomNumberAndDepartment(universityId, roomNumber, department);
             TimeTableWrapperDto wrapperDto = this.wrapperMapper.toDto(wrapper);
             return wrapperDto;
         } catch (Exception e) {

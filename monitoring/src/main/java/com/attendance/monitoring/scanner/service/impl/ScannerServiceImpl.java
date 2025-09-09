@@ -41,11 +41,11 @@ public class ScannerServiceImpl implements ScannerService {
             
             List<StudentRecordDto> studentRecordDtos = scannerDto.getStudents();
 
-            TimeTableWrapperDto tableWrapperDto = timeTableService.getTimeTable(scannerDto.getUniversityId(), scannerDto.getScannerNumber(), scannerDto.getDepartment(), null);
-           
+            TimeTableWrapperDto tableWrapperDto = timeTableService.getTimeTable(scannerDto.getUniversityId(), scannerDto.getScannerNumber(), scannerDto.getDepartment());
+            
             List<TimeTableBoxDto> timeTableBoxDto = tableWrapperDto.getWeeklyRoutine();//contains one weeks routine
 
-            List<TimeTableDto> periods = timeTableService.getDailyRoutine(timeTableBoxDto, day);// contains one day routine
+            List<TimeTableDto> periods = timeTableService.getDailyRoutine(timeTableBoxDto, day.toUpperCase());// contains one day routine
 
             TimeTableDto onePeriod = timeTableService.getOnePeriod(periods, scannerDto.getTimeOfReceive());
 
@@ -72,6 +72,7 @@ public class ScannerServiceImpl implements ScannerService {
             }
 
             this.attendanceService.saveAttendance(attendanceBoxDtos);
+           
             return true;
         } catch (Exception e) {
             e.printStackTrace();

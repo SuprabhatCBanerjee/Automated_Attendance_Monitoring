@@ -2,16 +2,18 @@ package com.attendance.monitoring.scanner.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.attendance.monitoring.scanner.dto.ScannerDto;
+import com.attendance.monitoring.scanner.service.ScannerService;
 import com.attendance.monitoring.student.dto.StudentRecordDto;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -46,12 +48,8 @@ public class ScannerController {
      *         in the night or as client requirements we push data to cloud server  
      */
 
-     @PostMapping("/student/record")
-     public String recordAttendance( ) {
-        
-         
-         return "i am record";
-     }
+     @Autowired
+     private ScannerService scannerService;
 
      @GetMapping("/student/get-record")
      public ResponseEntity<ScannerDto> getRecord() {
@@ -84,15 +82,17 @@ public class ScannerController {
 
 
      @PostMapping("/student/record")
-     public ResponseEntity<?> postMethodName(@RequestBody ScannerDto dto) {
+     public ResponseEntity<String> takeAttendance(@RequestBody ScannerDto dto) {
          
         try {
-            
+            this.scannerService.recordAttendance(dto);
+            return new ResponseEntity<>("Success",HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>("Failed",HttpStatus.FORBIDDEN);
         }
 
-         return new ResponseEntity<>(null,HttpStatus.OK);
+         
      }
      
      

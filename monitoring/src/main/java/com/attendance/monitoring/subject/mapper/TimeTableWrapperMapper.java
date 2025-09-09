@@ -27,7 +27,7 @@ public class TimeTableWrapperMapper {
         wrapper.setSection(dto.getSection());
         wrapper.setDepartment(dto.getDepartment());
         wrapper.setSemester(dto.getSemester());
-
+        wrapper.setUniversityId(dto.getUniversityId());
         wrapper.setWeeklyRoutine(dto.getWeeklyRoutine() == null
                 ? new ArrayList<>() 
                 : dto.getWeeklyRoutine().stream().map(tableboxMapper::toEntity).collect(Collectors.toList()));   
@@ -47,6 +47,7 @@ public class TimeTableWrapperMapper {
         dto.setYear(dto.getYear());
         dto.setNumberOfClasses(wrapper.getNumberOfClasses());
         dto.setSemester(wrapper.getSemester());
+        dto.setUniversityId(wrapper.getUniversityId());
 
           // map weekly routine
         ArrayList<TimeTableBoxDto> tableBoxDtos = new ArrayList<>();
