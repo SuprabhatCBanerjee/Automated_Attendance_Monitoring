@@ -36,4 +36,6 @@ public class StudentLoginDetailsService implements UserDetailsService{
             throw new UsernameNotFoundException(uniqueRoll);
         }
     }
+
+    
 }

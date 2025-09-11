@@ -23,10 +23,10 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthFilter filter;
-    
+
     //
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         
         http
             .cors(c -> c.configure(http))

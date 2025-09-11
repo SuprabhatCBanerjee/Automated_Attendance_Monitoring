@@ -17,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.attendance.monitoring.faculty.service.FacultyLoginDetailsService;
-import com.attendance.monitoring.security.JwtAuthFilter;
 import com.attendance.monitoring.student.service.StudentLoginDetailsService;
 
 //import com.task.management.service.LoginDetailsService;
@@ -31,8 +30,8 @@ public class StudentConfig {
     @Autowired
     private FacultyLoginDetailsService facultyLoginDetailsService;
 
-    @Autowired
-    private JwtAuthFilter jwtAuthFilter;
+    // @Autowired
+    // private JwtAuthFilter jwtAuthFilter;
 
     //
     // @Autowired
@@ -54,15 +53,16 @@ public class StudentConfig {
         // return null;
     // }
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(combinedUserDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
     //
     @Bean
-    public UserDetailsService combinedUserDetailsService() {
+    UserDetailsService combinedUserDetailsService() {
         return username -> {
             try {
                 return studentLoginDetailsService.loadUserByUsername(username);
@@ -71,15 +71,16 @@ public class StudentConfig {
             }
         };
     }
+
     //
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     //
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception{
+    AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception{
         return builder.getAuthenticationManager();
     }
     

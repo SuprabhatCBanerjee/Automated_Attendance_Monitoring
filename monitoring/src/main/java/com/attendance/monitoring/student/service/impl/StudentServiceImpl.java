@@ -3,6 +3,7 @@ package com.attendance.monitoring.student.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.attendance.monitoring.student.dto.StudentDto;
 import com.attendance.monitoring.student.dto.StudentSignupDto;
 import com.attendance.monitoring.student.mapper.StudentSignupMapper;
 import com.attendance.monitoring.student.model.StudentModel;
@@ -27,6 +28,17 @@ public class StudentServiceImpl implements StudentService{
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public StudentDto getSelf(String uniqueRollNumber) {
+        try {
+            // TODO Auto-generated method stub
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return null;
         }
     }
 }
